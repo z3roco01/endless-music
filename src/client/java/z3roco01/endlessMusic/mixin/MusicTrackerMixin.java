@@ -26,19 +26,20 @@ public abstract class MusicTrackerMixin {
     public void tick(CallbackInfo ci) {
         MusicSound musicSound = this.client.getMusicType();
         if (this.current != null) {
-            if (!((SoundEvent)musicSound.getSound().value()).getId().equals(this.current.getId()) && musicSound.shouldReplaceCurrentMusic()) {
+            if (!(musicSound.getSound().value()).getId().equals(this.current.getId()) && musicSound.shouldReplaceCurrentMusic()) {
                 this.client.getSoundManager().stop(this.current);
-                this.timeUntilNextSong = EndlessMusic.config.delay * 20;
+                this.timeUntilNextSong = EndlessMusic.getDelaySeconds();
             }
 
             if (!this.client.getSoundManager().isPlaying(this.current)) {
                 this.current = null;
-                this.timeUntilNextSong = EndlessMusic.config.delay * 20;
+                this.timeUntilNextSong = EndlessMusic.getDelaySeconds();
             }
         }
 
-        this.timeUntilNextSong = Math.min(this.timeUntilNextSong, musicSound.getMaxDelay());
-        if (this.current == null && this.timeUntilNextSong-- <= 0) {
+        this.timeUntilNextSong = Math.min(this.timeUntilNextSong, musicSound.getMaxDelay() + EndlessMusic.getDelaySeconds());
+        EndlessMusic.LOGGER.info(timeUntilNextSong + "");
+        if (this.timeUntilNextSong-- <= 0 && this.current == null) {
             this.play(musicSound);
         }
 
