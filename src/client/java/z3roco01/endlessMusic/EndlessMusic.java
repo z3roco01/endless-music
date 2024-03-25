@@ -20,4 +20,8 @@ public class EndlessMusic implements ClientModInitializer {
 
 		LOGGER.info("Finished init !");
 	}
+
+	public static int getDelaySeconds() {
+		return config.delay * 20;
+	}
 }
