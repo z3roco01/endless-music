@@ -38,7 +38,6 @@ public abstract class MusicTrackerMixin {
         }
 
         this.timeUntilNextSong = Math.min(this.timeUntilNextSong, musicSound.getMaxDelay() + EndlessMusic.getDelaySeconds());
-        EndlessMusic.LOGGER.info(timeUntilNextSong + "");
         if (this.timeUntilNextSong-- <= 0 && this.current == null) {
             this.play(musicSound);
         }
