@@ -7,11 +7,9 @@
 	"authors": [
 		"z3roco01"
 	],
-	"contact": {
-	},
 	"license": "Unlicense",
 	"icon": "assets/endless_music/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
 		"client": [
 			"z3roco01.endlessMusic.EndlessMusic"
@@ -28,12 +26,9 @@
 	],
 	"depends": {
 		"fabricloader": ">=0.15.7",
-		"minecraft": "~1.21",
+		"minecraft": "~1.21 ~1.21.1",
 		"java": ">=17",
 		"fabric-api": "*",
 		"cloth-config": ">=15.0.127"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
