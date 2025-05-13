@@ -1,7 +1,6 @@
 package z3roco01.endlessMusic.mixin;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.sound.MusicInstance;
 import net.minecraft.client.sound.MusicTracker;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.sound.MusicSound;
@@ -20,11 +19,11 @@ public abstract class MusicTrackerMixin {
     @Shadow @Nullable private SoundInstance current;
     @Shadow private int timeUntilNextSong;
 
-    @Shadow public abstract void play(MusicInstance music);
+    @Shadow public abstract void play(MusicSound type);
 
     @Inject(at = @At("HEAD"), method = "tick", cancellable = true)
     public void tick(CallbackInfo ci) {
-        MusicSound musicSound = this.client.getMusicInstance().music();
+        MusicSound musicSound = this.client.getMusicType();
 
 
         if (this.current != null && musicSound != null) {
@@ -41,7 +40,7 @@ public abstract class MusicTrackerMixin {
 
         this.timeUntilNextSong = Math.min(this.timeUntilNextSong, (musicSound == null ? 0 : musicSound.getMaxDelay()) + EndlessMusic.getDelayTicks());
         if (this.timeUntilNextSong-- <= 0 && this.current == null && musicSound != null) {
-            this.play(new MusicInstance(musicSound));
+            this.play(musicSound);
         }
 
         ci.cancel();
