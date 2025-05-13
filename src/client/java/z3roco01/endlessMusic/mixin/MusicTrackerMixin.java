@@ -25,6 +25,12 @@ public abstract class MusicTrackerMixin {
     @Inject(at = @At("HEAD"), method = "tick", cancellable = true)
     public void tick(CallbackInfo ci) {
         MusicSound musicSound = this.client.getMusicInstance().music();
+        if(musicSound == null) {
+            ci.cancel();
+            return;
+        }
+
+
         if (this.current != null && musicSound != null) {
             if (!(musicSound.getSound().value()).id().equals(this.current.getId()) && musicSound.shouldReplaceCurrentMusic()) {
                 this.client.getSoundManager().stop(this.current);
