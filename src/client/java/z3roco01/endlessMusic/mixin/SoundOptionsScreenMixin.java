@@ -13,13 +13,12 @@ import z3roco01.endlessMusic.gui.widget.MusicFrequencySlider;
 
 @Mixin(SoundOptionsScreen.class)
 public abstract class SoundOptionsScreenMixin extends GameOptionsScreen {
-
     public SoundOptionsScreenMixin(Screen parent, GameOptions gameOptions, Text title) {
         super(parent, gameOptions, title);
     }
 
     @Inject(method = "init", at = @At("TAIL"))
     public void addOptions(CallbackInfo ci) {
-        this.addDrawableChild(new MusicFrequencySlider(0, 0, 310, 20));
+        this.addDrawableChild(new MusicFrequencySlider(this.width/2-155, 0, 310, 20));
     }
 }
