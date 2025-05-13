@@ -20,6 +20,6 @@ public abstract class SoundOptionsScreenMixin extends GameOptionsScreen {
     @Inject(method = "addOptions", at = @At("TAIL"))
     public void addOptions(CallbackInfo ci) {
         assert this.body != null;
-        this.body.addWidgetEntry(new MusicFrequencySlider(0, 0, 310, 20, Text.of("fard"), 1.0), null);
+        this.body.addWidgetEntry(new MusicFrequencySlider(0, 0, 310, 20), null);
     }
 }

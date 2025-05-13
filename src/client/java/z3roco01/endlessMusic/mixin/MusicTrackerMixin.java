@@ -25,26 +25,22 @@ public abstract class MusicTrackerMixin {
     @Inject(at = @At("HEAD"), method = "tick", cancellable = true)
     public void tick(CallbackInfo ci) {
         MusicSound musicSound = this.client.getMusicInstance().music();
-        if(musicSound == null) {
-            ci.cancel();
-            return;
-        }
 
 
         if (this.current != null && musicSound != null) {
             if (!(musicSound.getSound().value()).id().equals(this.current.getId()) && musicSound.shouldReplaceCurrentMusic()) {
                 this.client.getSoundManager().stop(this.current);
-                this.timeUntilNextSong = EndlessMusic.getDelaySeconds();
+                this.timeUntilNextSong = EndlessMusic.getDelayTicks();
             }
 
             if (!this.client.getSoundManager().isPlaying(this.current)) {
                 this.current = null;
-                this.timeUntilNextSong = EndlessMusic.getDelaySeconds();
+                this.timeUntilNextSong = EndlessMusic.getDelayTicks();
             }
         }
 
-        this.timeUntilNextSong = Math.min(this.timeUntilNextSong, (musicSound == null ? 0 : musicSound.getMaxDelay()) + EndlessMusic.getDelaySeconds());
-        if (this.timeUntilNextSong-- <= 0 && this.current == null) {
+        this.timeUntilNextSong = Math.min(this.timeUntilNextSong, (musicSound == null ? 0 : musicSound.getMaxDelay()) + EndlessMusic.getDelayTicks());
+        if (this.timeUntilNextSong-- <= 0 && this.current == null && musicSound != null) {
             this.play(new MusicInstance(musicSound));
         }
 
