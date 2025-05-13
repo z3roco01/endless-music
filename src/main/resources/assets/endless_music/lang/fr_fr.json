@@ -1,5 +1,5 @@
 {
-    "text.autoconfig.endless_musicDelay.title": "Musique infini",
-    "text.autoconfig.endless_musicDelay.option.delay": "Délai",
-    "text.autoconfig.endless_musicDelay.option.delay.@Tooltip": "Délai entre les chansons en secondes"
+    "text.autoconfig.endless_musicDelay.title": "Endless Music",
+    "text.autoconfig.endless_musicDelay.option.delay": "Temps",
+    "text.autoconfig.endless_musicDelay.option.delay.@Tooltip": "Temps entre les chansons en secondes"
 }
